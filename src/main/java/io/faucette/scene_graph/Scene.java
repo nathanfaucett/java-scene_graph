@@ -125,6 +125,12 @@ public class Scene {
         return clear();
     }
 
+    public Entity getEntity(String name) {
+        return entityNameHash.get(name);
+    }
+    public Entity getEntity(UUID uuid) {
+        return entityHash.get(uuid);
+    }
     public boolean hasEntity(Entity entity) {
         return entityHash.containsKey(entity.getId());
     }

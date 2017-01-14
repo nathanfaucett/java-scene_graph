@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.Iterator;
+import java.util.Collections;
 
 
 public class Entity {
@@ -178,8 +178,8 @@ public class Entity {
         return this;
     }
 
-    public Iterable<Entity> getChildren() {
-        return this.children;
+    public List<Entity> getChildren() {
+        return Collections.unmodifiableList(this.children);
     }
 
     private static void updateDepth(Entity entity, int depth) {
