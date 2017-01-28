@@ -84,14 +84,14 @@ public class Scene {
 
             sortPlugins();
 
-            for (Plugin plugin: plugins) {
-                plugin.init();
+            for (int i = 0, il = plugins.size(); i < il; i++ ) {
+                plugins.get(i).init();
             }
 
             sortComponentManagers();
 
-            for (ComponentManager componentManager: componentManagers) {
-                componentManager.init();
+            for (int i = 0, il = componentManagers.size(); i < il; i++ ) {
+                componentManagers.get(i).init();
             }
         }
         return this;
@@ -101,11 +101,11 @@ public class Scene {
 
         time.update();
 
-        for (Plugin plugin: plugins) {
-            plugin.update();
+        for (int i = 0, il = plugins.size(); i < il; i++ ) {
+            plugins.get(i).update();
         }
-        for (ComponentManager componentManager: componentManagers) {
-            componentManager.update();
+        for (int i = 0, il = componentManagers.size(); i < il; i++ ) {
+            componentManagers.get(i).update();
         }
 
         return this;

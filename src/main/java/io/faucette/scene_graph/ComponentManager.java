@@ -27,17 +27,17 @@ public class ComponentManager {
     }
 
     public ComponentManager init() {
-       for (Component component: components) {
-           component.init();
-       }
-       return this;
+        for (int i = 0, il = components.size(); i < il; i++) {
+            components.get(i).init();
+        }
+        return this;
     }
 
     public ComponentManager update() {
-       for (Component component: components) {
-           component.update();
-       }
-       return this;
+        for (int i = 0, il = components.size(); i < il; i++) {
+            components.get(i).update();
+        }
+        return this;
     }
 
     public ComponentManager sort() {

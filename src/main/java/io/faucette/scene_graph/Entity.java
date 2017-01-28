@@ -12,6 +12,7 @@ import java.util.Collections;
 public class Entity {
     private UUID id;
     private String name;
+    private String tag;
     private int depth;
     protected Scene scene;
     private Entity root;
@@ -24,7 +25,9 @@ public class Entity {
 
     public Entity(String name) {
         id = UUID.randomUUID();
-        this.name = name;
+
+        this.name = name == null ? "" : name;
+        tag = "";
 
         depth = 0;
         scene = null;
@@ -48,6 +51,20 @@ public class Entity {
     }
     public boolean hasName() {
         return !name.equals("");
+    }
+
+    public Entity setTag(String tag) {
+        this.tag = tag;
+        return this;
+    }
+    public String getTag() {
+        return tag;
+    }
+    public boolean compareTag(String tag) {
+        return this.tag.equals(tag);
+    }
+    public boolean hasTag() {
+        return tag != null;
     }
 
     public int getDepth() {
