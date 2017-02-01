@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,6 +21,8 @@ public class Scene {
     private List<Entity> entities;
     private Map<UUID, Entity> entityHash;
     private Map<String, Entity> entityNameHash;
+    private Set<Entity> entityAddSet;
+    private Set<Entity> entityRemoveSet;
 
     private List<ComponentManager> componentManagers;
     private Map<Class<? extends ComponentManager>, ComponentManager> componentManagerHash;
@@ -52,6 +56,8 @@ public class Scene {
         entities = new ArrayList<>();
         entityHash = new HashMap<>();
         entityNameHash = new HashMap<>();
+        entityAddSet = new HashSet<>();
+        entityRemoveSet = new HashSet<>();
 
         componentManagers = new ArrayList<>();
         componentManagerHash = new HashMap<>();
@@ -101,6 +107,18 @@ public class Scene {
 
         time.update();
 
+
+        for (Entity entity: entityAddSet) {
+            addEntityNow(entity);
+        }
+        entityAddSet.clear();
+
+        for (Entity entity: entityRemoveSet) {
+            removeEntityNow(entity);
+        }
+        entityRemoveSet.clear();
+
+
         for (int i = 0, il = plugins.size(); i < il; i++ ) {
             plugins.get(i).update();
         }
@@ -112,6 +130,10 @@ public class Scene {
     }
 
     public Scene clear() {
+
+        entityAddSet.clear();
+        entityRemoveSet.clear();
+
         for (int i = entities.size() - 1; i >= 0; i--) {
             entities.get(i).destroy();
         }
@@ -134,7 +156,16 @@ public class Scene {
     public boolean hasEntity(Entity entity) {
         return entityHash.containsKey(entity.getId());
     }
+
     public Scene addEntity(Entity entity) {
+        if (initted) {
+            entityAddSet.add(entity);
+        } else {
+            addEntityNow(entity);
+        }
+        return this;
+    }
+    private Scene addEntityNow(Entity entity) {
         if (!entityHash.containsKey(entity.getId())) {
             entity.scene = this;
             entities.add(entity);
@@ -155,6 +186,14 @@ public class Scene {
     }
 
     public Scene removeEntity(Entity entity) {
+        if (initted) {
+            entityRemoveSet.add(entity);
+        } else {
+            removeEntityNow(entity);
+        }
+        return this;
+    }
+    private Scene removeEntityNow(Entity entity) {
         if (entityHash.containsKey(entity.getId())) {
             entity.scene = null;
             entities.remove(entity);
