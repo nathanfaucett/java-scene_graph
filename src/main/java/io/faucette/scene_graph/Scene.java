@@ -90,14 +90,14 @@ public class Scene {
 
             sortPlugins();
 
-            for (int i = 0, il = plugins.size(); i < il; i++ ) {
-                plugins.get(i).init();
+            for (Plugin plugin : plugins) {
+                plugin.init();
             }
 
             sortComponentManagers();
 
-            for (int i = 0, il = componentManagers.size(); i < il; i++ ) {
-                componentManagers.get(i).init();
+            for (ComponentManager componentManager : componentManagers) {
+                componentManager.init();
             }
         }
         return this;
@@ -119,11 +119,11 @@ public class Scene {
         entityRemoveSet.clear();
 
 
-        for (int i = 0, il = plugins.size(); i < il; i++ ) {
-            plugins.get(i).update();
+        for (Plugin plugin : plugins) {
+            plugin.update();
         }
-        for (int i = 0, il = componentManagers.size(); i < il; i++ ) {
-            componentManagers.get(i).update();
+        for (ComponentManager componentManager : componentManagers) {
+            componentManager.update();
         }
 
         return this;
