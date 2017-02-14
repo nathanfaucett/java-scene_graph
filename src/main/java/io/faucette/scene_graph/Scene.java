@@ -11,8 +11,10 @@ import java.util.UUID;
 import java.util.Collections;
 import java.util.Comparator;
 
+import io.faucette.event_emitter.EventEmitter;
 
-public class Scene {
+
+public class Scene extends EventEmitter {
     private UUID id;
     private String name;
 

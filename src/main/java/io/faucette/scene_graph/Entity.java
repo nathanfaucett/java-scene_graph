@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.Collections;
 
+import io.faucette.event_emitter.EventEmitter;
 
-public class Entity {
+
+public class Entity extends EventEmitter {
     private UUID id;
     private String name;
     private String tag;

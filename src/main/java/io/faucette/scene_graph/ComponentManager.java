@@ -7,8 +7,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
+import io.faucette.event_emitter.EventEmitter;
 
-public class ComponentManager {
+
+public class ComponentManager extends EventEmitter {
     protected Scene scene;
     protected List<Component> components;
 

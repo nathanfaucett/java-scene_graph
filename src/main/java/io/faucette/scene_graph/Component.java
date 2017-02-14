@@ -1,7 +1,10 @@
 package io.faucette.scene_graph;
 
 
-public class Component implements Comparable<Component> {
+import io.faucette.event_emitter.EventEmitter;
+
+
+public class Component extends EventEmitter implements Comparable<Component> {
     protected Entity entity;
     protected ComponentManager componentManager;
 
@@ -17,7 +20,7 @@ public class Component implements Comparable<Component> {
     public boolean hasEntity() {
         return entity != null;
     }
-    
+
     public boolean hasComponentManager() {
         return componentManager != null;
     }

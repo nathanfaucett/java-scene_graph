@@ -1,7 +1,9 @@
 package io.faucette.scene_graph;
 
+import io.faucette.event_emitter.EventEmitter;
 
-public class Plugin {
+
+public class Plugin extends EventEmitter {
     protected Scene scene;
 
 

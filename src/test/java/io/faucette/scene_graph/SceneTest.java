@@ -2,6 +2,8 @@ package io.faucette.scene_graph;
 
 
 import java.util.Iterator;
+import io.faucette.event_emitter.Emitter;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -29,6 +31,31 @@ public class SceneTest {
         parent.removeChild(child);
         assertTrue(scene.hasEntity(parent));
         assertTrue(!scene.hasEntity(child));
+    }
+    @Test
+    public void testEvents() {
+        Scene scene = new Scene();
+        Entity entity = new Entity("name");
+
+        entity.addComponent(new TestComponent());
+        scene.addEntity(entity);
+
+        final AtomicBoolean called = new AtomicBoolean(false);
+
+        scene.on("event", new Emitter.Callback() {
+            public void call(Emitter emitter, Object[] args) {
+                called.set(true);
+            }
+        });
+        entity.on("event", new Emitter.Callback() {
+            public void call(Emitter emitter, Object[] args) {
+                Entity entity = (Entity) emitter;
+                entity.getScene().emit("event");
+            }
+        });
+
+        entity.emit("event");
+        assertTrue(called.get());
     }
     @Test
     public void testComponentsAddedToEntityAddedToSceneAndRemoved() {

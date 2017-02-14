@@ -1,1 +1,5 @@
 rootProject.name = "java-scene_graph"
+
+
+include ":java-event_emitter"
+project(":java-event_emitter").projectDir = new File(settingsDir, "../java-event_emitter")
