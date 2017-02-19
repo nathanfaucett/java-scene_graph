@@ -181,7 +181,7 @@ public class Scene extends EventEmitter {
                 addComponent(component);
             }
             for (Entity child: entity.children) {
-                addEntity(child);
+                addEntityNow(child);
             }
         }
         return this;
@@ -209,7 +209,7 @@ public class Scene extends EventEmitter {
                 removeComponent(component);
             }
             for (Entity child: entity.children) {
-                removeEntity(child);
+                removeEntityNow(child);
             }
         }
         return this;
