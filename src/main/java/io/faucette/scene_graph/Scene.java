@@ -136,12 +136,16 @@ public class Scene extends EventEmitter {
         entityAddSet.clear();
         entityRemoveSet.clear();
 
-        for (int i = entities.size() - 1; i >= 0; i--) {
-            entities.get(i).destroy();
+        for (Entity entity: entities) {
+            entity.clear();
         }
-        for (int i = plugins.size() - 1; i >= 0; i--) {
-            plugins.get(i).destroy();
+        for (Plugin plugin: plugins) {
+            plugin.clear();
         }
+
+        entities.clear();
+        plugins.clear();
+
         return this;
     }
 

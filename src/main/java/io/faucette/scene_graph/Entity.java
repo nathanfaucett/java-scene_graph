@@ -93,14 +93,18 @@ public class Entity extends EventEmitter {
 
     public Entity clear() {
 
-        detach();
-
-        for (int i = components.size(); i >= 0; i--) {
+        for (int i = components.size() - 1; i >= 0; i--) {
             components.get(i).destroy();
         }
-        for (int i = children.size(); i >= 0; i--) {
-            children.get(i).destroy();
+        for (Entity entity: children) {
+            entity.clear();
+            entity.parent = null;
+            entity.root = entity;
+            entity.depth = 0;
         }
+
+        children.clear();
+
         return this;
     }
 

@@ -29,15 +29,15 @@ public class ComponentManager extends EventEmitter {
     }
 
     public ComponentManager init() {
-        for (int i = 0, il = components.size(); i < il; i++) {
-            components.get(i).init();
+        for (Component component: components) {
+            component.init();
         }
         return this;
     }
 
     public ComponentManager update() {
-        for (int i = 0, il = components.size(); i < il; i++) {
-            components.get(i).update();
+        for (Component component: components) {
+            component.update();
         }
         return this;
     }
